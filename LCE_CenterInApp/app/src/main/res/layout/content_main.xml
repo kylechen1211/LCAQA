@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.welkins.lca.center_in.MainActivity"
+    tools:context="com.welkins.lce.center_in.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <EditText

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.welkins.lca.center_in.MainActivity">
+    tools:context="com.welkins.lce.center_in.MainActivity">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

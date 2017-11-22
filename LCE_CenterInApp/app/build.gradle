@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId 'com.welkins.lca.center_in'
+        applicationId 'com.welkins.lce.center_in'
         minSdkVersion 21
         targetSdkVersion 25
         versionCode 1

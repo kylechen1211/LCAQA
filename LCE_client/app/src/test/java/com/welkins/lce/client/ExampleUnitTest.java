@@ -1,4 +1,4 @@
-package com.welkins.lca.client;
+package com.welkins.lce.client;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.welkins.lca.center_in;
+package com.welkins.lce.client;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.weijen.a726demo", appContext.getPackageName());
+        assertEquals("com.example.liu.a20171105", appContext.getPackageName());
     }
 }

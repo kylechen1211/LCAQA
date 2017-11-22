@@ -1,4 +1,4 @@
-package com.welkins.lca.center_in;
+package com.welkins.lce.center_in;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

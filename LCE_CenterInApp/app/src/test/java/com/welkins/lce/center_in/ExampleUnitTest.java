@@ -1,4 +1,4 @@
-package com.welkins.lca.center_in;
+package com.welkins.lce.center_in;
 
 import org.junit.Test;
 

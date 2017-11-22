@@ -1,4 +1,4 @@
-package com.welkins.lca.center_in;
+package com.welkins.lce.center_in;
 
 import android.content.Context;
 import android.content.Intent;
