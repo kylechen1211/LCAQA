@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.welkins.lca.cilent.MainActivity">
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="275dp"
+        android:layout_height="85dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="Key...."
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="36dp" />
+
+    <Button
+        android:id="@+id/Button01"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/Button04"
+        android:layout_alignBottom="@+id/Button04"
+        android:layout_alignStart="@+id/EditText01"
+        android:text="傳送至伺服器"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="310dp" />
+
+    <EditText
+        android:id="@+id/EditText01"
+        android:layout_width="275dp"
+        android:layout_height="73dp"
+        android:layout_below="@+id/TextView01"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Name"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="219dp" />
+
+    <Button
+        android:id="@+id/Button02"
+        android:layout_width="240dp"
+        android:layout_height="51dp"
+        android:layout_above="@+id/Button03"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="9dp"
+        android:text="加入其他成員"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="377dp" />
+
+    <Button
+        android:id="@+id/Button03"
+        android:layout_width="237dp"
+        android:layout_height="51dp"
+        android:layout_alignEnd="@+id/Button02"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="18dp"
+        android:text="輸入完成"
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="435dp" />
+
+    <Button
+        android:id="@+id/Button04"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/Button02"
+        android:layout_alignEnd="@+id/EditText01"
+        android:layout_marginBottom="13dp"
+        android:text="接受伺服器資料"
+        tools:layout_editor_absoluteX="193dp"
+        tools:layout_editor_absoluteY="310dp" />
+
+</RelativeLayout>

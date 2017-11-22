@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.welkins.lca.cilent.Main2Activity">
+
+    <Button
+        android:id="@+id/btn_call"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="38dp"
+        android:text="取得金鑰"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="17dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:text="加密"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv2_p2" />
+
+    <TextView
+        android:id="@+id/tv_p2"
+        android:layout_width="290dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_p2" />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="112dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginTop="17dp"
+        android:text="解密"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv2_p2" />
+
+    <TextView
+        android:id="@+id/tv2_p2"
+        android:layout_width="290dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_p2" />
+
+    <TextView
+        android:id="@+id/tv_key"
+        android:layout_width="220dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="38dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_p2"
+        android:layout_width="283dp"
+        android:layout_height="96dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="請輸入內容..."
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_call" />
+
+</android.support.constraint.ConstraintLayout>
