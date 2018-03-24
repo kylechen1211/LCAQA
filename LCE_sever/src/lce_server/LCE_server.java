@@ -18,17 +18,13 @@ public class LCE_server {
 	private static int serverport = 5050;
     private static ServerSocket serverSocket;
     private final static String IvAES = "1234567890abcdef" ;
-    private final static String KeyAES = "abcdefghijklmnopqrstuvwxyz123456" ;
-    private final static String CenterKey ="idfhdlhgdsihfildhilshgisdhigdxxx" ;
- 
-    // 用串列來儲存每個client
-    //private static ArrayList<Socket> players=new ArrayList<Socket>();
+    private final static String KeyAES = "abcdefghijklmnopqrstuvwxyz123456" ;//AES用key
+    private final static String CenterKey ="idfhdlhgdsihfildhilshgisdhigdxxx" ;//中心key
  
     // 程式進入點
     public static void main(String[] args) {
     	        
         try {
-        	//System.out.println("Server Socket ERR");
             serverSocket = new ServerSocket(serverport);
             System.out.println("Server is start.");
  
@@ -47,13 +43,13 @@ public class LCE_server {
  
         
     }
-    
+    //SHA256
     public static byte[] shaa(String args) throws Exception {
         final MessageDigest md = MessageDigest.getInstance("SHA-256");
         final byte[] sha256 = md.digest(args.getBytes("UTF-8"));
         return sha256;
     }
-    
+    //AND
     public static String AND(byte[] by1,byte[] by2)
     {
         byte[][] byt1=new byte[16][2];
@@ -81,7 +77,7 @@ public class LCE_server {
                 +output[9]+output[10]+output[11]+output[12]+output[13]+output[14]+output[15];
         return o;
     }
-    
+    //字串轉byte陣列
     private static byte[] stringToBytes(String input) {
         int length = input.length();
         byte[] output = new byte[length / 2];
@@ -91,7 +87,7 @@ public class LCE_server {
         }
         return output;
     }
-    
+    //byte陣列轉16進位字串
     private static String bytesToHexString(final byte[] bytes) {
         final StringBuilder sb = new StringBuilder();
         for (final byte b : bytes) {
@@ -102,7 +98,7 @@ public class LCE_server {
         }
         return sb.toString().toLowerCase();
     }
-
+    //AES加密
 	private static byte[] EncryptAES(byte[] iv, byte[] key,byte[] text)
     {
         try
@@ -120,7 +116,7 @@ public class LCE_server {
             return null;
         }
     }
-    //AES解密，帶入byte[]型態的16位英數組合文字、32位英數組合Key、需解密文字
+    //AES解密
     private static byte[] DecryptAES(byte[] iv,byte[] key,byte[] text)
     {
         try
@@ -160,9 +156,6 @@ public class LCE_server {
             @Override
             public void run() {
                 try {
-                    // 增加新的使用者
-                    //players.add(socket);
- 
                     // 取得網路串流 
                     BufferedReader br = new BufferedReader(
                             new InputStreamReader(socket.getInputStream()));
@@ -177,12 +170,11 @@ public class LCE_server {
                         System.out.println(inTextAES);
                         System.out.println("inTextAES2");
                         System.out.println(inTextAES2);
-                        //System.out.println(Base64.getDecoder().decode(inTextAES.getBytes("UTF-8")));
                         byte[] inTextByte = DecryptAES(IvAES.getBytes("UTF-8"), stringToBytes(KeyAES),Base64.getDecoder().decode(inTextAES.getBytes("UTF-8")));
                         byte[] inTextByte2 = DecryptAES(IvAES.getBytes("UTF-8"), stringToBytes(KeyAES),Base64.getDecoder().decode(inTextAES2.getBytes("UTF-8")));
                         String TEXT = new String(inTextByte,"UTF-8");
                         String TEXT2 = new String(inTextByte2,"UTF-8");
-                        // 輸出訊息
+                        // 2段AES解密並合併，輸出user id's hash
                         String mergeTEXT =TEXT+TEXT2;
                         System.out.println("mergeTEXT");
                         System.out.println(mergeTEXT);
@@ -190,11 +182,12 @@ public class LCE_server {
                         String afterAND=null;
                         byte[] CenterKeySHA =new byte[CenterKey.length()];
                         try {
-                        	CenterKeySHA=shaa(CenterKey);
-                        	afterAND=AND(stringToBytes(mergeTEXT),CenterKeySHA);
+                        	CenterKeySHA=shaa(CenterKey);//center key sha256
+                        	afterAND=AND(stringToBytes(mergeTEXT),CenterKeySHA);//and(id's hash,center key)
                         }catch (java.lang.Exception ex){
                             System.out.print("Exception!");
                         }
+                        //and後一樣切2段傳回去
                         String afterAND0_32=afterAND.substring(0,32);
                         String afterAND33_64=afterAND.substring(32,64);
                         byte[] outTextByte = EncryptAES(IvAES.getBytes("UTF-8"), stringToBytes(KeyAES),afterAND0_32.getBytes("UTF-8"));
@@ -214,9 +207,7 @@ public class LCE_server {
  
                 } catch (IOException e) {
                 }
- 
-                // 移除客戶端
-                //players.remove(socket);            
+         
             }
         });
  

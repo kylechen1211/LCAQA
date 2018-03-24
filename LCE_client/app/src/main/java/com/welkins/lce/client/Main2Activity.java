@@ -9,13 +9,10 @@ package com.welkins.lce.client;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.TextView;
-
         import java.security.spec.AlgorithmParameterSpec;
-
         import javax.crypto.Cipher;
         import javax.crypto.spec.IvParameterSpec;
         import javax.crypto.spec.SecretKeySpec;
-
         import static java.lang.Character.digit;
 
 public class Main2Activity extends AppCompatActivity {
@@ -28,7 +25,7 @@ public class Main2Activity extends AppCompatActivity {
     private Button btn_encry;
     private Button btn_decry;
     private final static String IvAES = "1234567890abcdef" ;
-
+    //字串轉byte陣列
     private static byte[] stringToBytes(String input) {
         int length = input.length();
         byte[] output = new byte[length / 2];
@@ -38,6 +35,7 @@ public class Main2Activity extends AppCompatActivity {
         }
         return output;
     }
+    //加密完之後以分享方式傳送至其他通訊軟體
     private void shareTo(String subject, String body, String chooserTitle) {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
@@ -45,6 +43,7 @@ public class Main2Activity extends AppCompatActivity {
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
         startActivity(Intent.createChooser(sharingIntent, chooserTitle));
     }
+    //AES加密
     private static byte[] EncryptAES(byte[] iv, byte[] key,byte[] text) //key=abc
     {
         try
@@ -62,7 +61,7 @@ public class Main2Activity extends AppCompatActivity {
             return null;
         }
     }
-    //AES解密，帶入byte[]型態的16位英數組合文字、32位英數組合Key、需解密文字
+    //AES解密，32位英數組合Key
     private static byte[] DecryptAES(byte[] iv,byte[] key,byte[] text)
     {
         try
@@ -81,6 +80,7 @@ public class Main2Activity extends AppCompatActivity {
             return null;
         }
     }
+    //從剪貼簿複製文字來進行解密
     private String copyFromClipboard(){
         int sdk = android.os.Build.VERSION.SDK_INT;
         if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
@@ -132,7 +132,6 @@ public class Main2Activity extends AppCompatActivity {
         });
         btn_decry.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
 
                 output_p2.setText("擷取之密文:"+copyFromClipboard());
                 String TextAES=output_p2.getText().toString();

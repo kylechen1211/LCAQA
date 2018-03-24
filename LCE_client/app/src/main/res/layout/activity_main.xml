@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
     tools:context="com.welkins.lce.cilent.MainActivity">
 
     <TextView
@@ -13,7 +14,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:text="Key...."
+        android:text="@string/key"
+        android:textColor="@color/button_yellow"
         tools:layout_editor_absoluteX="43dp"
         tools:layout_editor_absoluteY="36dp" />
 
@@ -24,7 +26,9 @@
         android:layout_alignBaseline="@+id/Button04"
         android:layout_alignBottom="@+id/Button04"
         android:layout_alignStart="@+id/EditText01"
-        android:text="傳送至伺服器"
+        android:background="@color/dark2"
+        android:text="@string/傳送至伺服器"
+        android:textColor="@color/button_blue"
         tools:layout_editor_absoluteX="43dp"
         tools:layout_editor_absoluteY="310dp" />
 
@@ -36,8 +40,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
         android:ems="10"
+        android:hint="@string/name"
         android:inputType="textPersonName"
-        android:hint="Name"
+        android:textColor="@color/button_yellow"
         tools:layout_editor_absoluteX="43dp"
         tools:layout_editor_absoluteY="219dp" />
 
@@ -48,7 +53,9 @@
         android:layout_above="@+id/Button03"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="9dp"
-        android:text="加入其他成員"
+        android:background="@color/dark2"
+        android:text="@string/加入其他成員"
+        android:textColor="@color/button_blue"
         tools:layout_editor_absoluteX="60dp"
         tools:layout_editor_absoluteY="377dp" />
 
@@ -59,7 +66,9 @@
         android:layout_alignEnd="@+id/Button02"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="18dp"
-        android:text="輸入完成"
+        android:background="@color/dark2"
+        android:text="@string/輸入完成"
+        android:textColor="@color/button_blue"
         tools:layout_editor_absoluteX="62dp"
         tools:layout_editor_absoluteY="435dp" />
 
@@ -70,7 +79,9 @@
         android:layout_above="@+id/Button02"
         android:layout_alignEnd="@+id/EditText01"
         android:layout_marginBottom="13dp"
-        android:text="接受伺服器資料"
+        android:background="@color/dark2"
+        android:text="@string/接受伺服器資料"
+        android:textColor="@color/button_blue"
         tools:layout_editor_absoluteX="193dp"
         tools:layout_editor_absoluteY="310dp" />
 

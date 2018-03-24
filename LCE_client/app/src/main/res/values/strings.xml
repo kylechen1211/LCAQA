@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">LCE_client</string>
+    <string name="key">Key....</string>
+    <string name="name">Name</string>
+    <string name="傳送至伺服器">傳送至伺服器</string>
+    <string name="加入其他成員">加入其他成員</string>
+    <string name="輸入完成">輸入完成</string>
+    <string name="接受伺服器資料">接受伺服器資料</string>
 </resources>

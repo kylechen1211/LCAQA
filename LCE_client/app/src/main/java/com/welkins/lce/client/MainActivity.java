@@ -9,7 +9,6 @@ package com.welkins.lce.client;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.TextView;
-
         import java.io.BufferedReader;
         import java.io.BufferedWriter;
         import java.io.IOException;
@@ -19,29 +18,25 @@ package com.welkins.lce.client;
         import java.net.Socket;
         import java.security.MessageDigest;
         import java.security.spec.AlgorithmParameterSpec;
-
         import javax.crypto.Cipher;
         import javax.crypto.spec.IvParameterSpec;
         import javax.crypto.spec.SecretKeySpec;
-
         import static java.lang.Character.digit;
 
 public class MainActivity extends AppCompatActivity {
     public static Handler mHandler = new Handler();
-    TextView TextView01;    // 用來顯示文字訊息
-    EditText EditText01;    // 文字方塊
-    EditText EditText02;
+    TextView TextView01;
+    EditText EditText01;
     String tmp1=null;
-    String tmp2=null;     // 暫存文字訊息
-    Socket clientSocket;    // 客戶端socket
+    String tmp2=null;
+    Socket clientSocket;
     String AESID1;
     String AESID2;
-    String result;
     String finalkey;
     String returnkey;
-    String KeyAES="abcdefghijklmnopqrstuvwxyz123456";
-    String serverIP;
+    String KeyAES="abcdefghijklmnopqrstuvwxyz123456";   //AES用key
     private final static String IvAES = "1234567890abcdef" ;
+    //byte陣列轉16進位字串
     private static String bytesToHexString(final byte[] bytes) {
         final StringBuilder sb = new StringBuilder();
         for (final byte b : bytes) {
@@ -52,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return sb.toString().toLowerCase();
     }
+    //16進位字串轉byte陣列
     public static byte[] hexStringToByteArray(String s) {
         int len = s.length();
         byte[] data = new byte[len / 2];
@@ -61,11 +57,13 @@ public class MainActivity extends AppCompatActivity {
         }
         return data;
     }
+    //SHA256
     public static byte[] shaa(String args) throws Exception {
         final MessageDigest md = MessageDigest.getInstance("SHA-256");
         final byte[] sha256 = md.digest(args.getBytes("UTF-8"));
         return sha256;
     }
+    //AND
     public static String And(byte[] by1,byte[] by2)
     {
         byte[][] byt1=new byte[16][2];
@@ -93,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 +output[9]+output[10]+output[11]+output[12]+output[13]+output[14]+output[15];
         return o;
     }
+    //字串轉byte陣列
     private static byte[] stringToBytes(String input) {
         int length = input.length();
         byte[] output = new byte[length / 2];
@@ -102,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return output;
     }
+    //AES加密
     private static byte[] EncryptAES(byte[] iv, byte[] key,byte[] text) //key=abc
     {
         try
@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
             Cipher mCipher = null;
             mCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             mCipher.init(Cipher.ENCRYPT_MODE,mSecretKeySpec,mAlgorithmParameterSpec);
-
             return mCipher.doFinal(text);
         }
         catch(Exception ex)
@@ -119,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
+    //AES解密
     private static byte[] DecryptAES(byte[] iv,byte[] key,byte[] text)
     {
         try
@@ -141,17 +141,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // 從資源檔裡取得位址後強制轉型成文字方塊
         TextView01 = (TextView) findViewById(R.id.TextView01);
         EditText01=(EditText) findViewById(R.id.EditText01);
-        // 以新的執行緒來讀取資料
         Thread t = new Thread(readData);
-        // 啟動執行緒
         t.start();
-        // 從資源檔裡取得位址後強制轉型成按鈕
 
         Button button1=(Button) findViewById(R.id.Button01);
-
         button1.setOnClickListener(new Button.OnClickListener() {
 
             public void onClick(View v) {
@@ -165,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 try {
                     String tempAESID=And(Textoutcome,Textoutcome);
+                    //id hash切2段
                     byte[] TextByte1 = EncryptAES(IvAES.getBytes("UTF-8"), stringToBytes(KeyAES), tempAESID.substring(0,32).getBytes("UTF-8"));
                     byte[] TextByte2 = EncryptAES(IvAES.getBytes("UTF-8"), stringToBytes(KeyAES), tempAESID.substring(32,64).getBytes("UTF-8"));
                     AESID1=Base64.encodeToString(TextByte1, Base64.DEFAULT);
@@ -172,20 +168,17 @@ public class MainActivity extends AppCompatActivity {
                 }catch (java.lang.Exception ex){
                     System.out.print("Exception!");
                 }
-                // 如果已連接則
+
                 if(clientSocket.isConnected()){
-
                     BufferedWriter bw;
-
                     try {
-                        // 取得網路輸出串流
                         bw = new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream()));
-                        // 寫入訊息
+                        //2段分開加密傳送
                         bw.write(AESID1);
-                        // 立即發送
+                        // 發送
                         bw.flush();
                         bw.write(AESID2);
-                        // 立即發送
+                        // 發送
                         bw.flush();
                     } catch (IOException e) {
                     }
@@ -208,9 +201,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 finalkey=returnkey;
                 TextView01.setText(finalkey);
-
-                // TextView01.setText(tmp1/*.replaceAll("\\n", "")*/+'\n' + tmp2/*.replaceAll("\\n", "")*/ );
-
             }
         });
         Button button2=(Button) findViewById(R.id.Button02);
@@ -244,48 +234,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    // 顯示更新訊息
     private Runnable updateText = new Runnable() {
         public void run() {
-            // 加入新訊息並換行
             TextView01.append(tmp1 + "\n" + tmp2 );
         }
     };
 
-    // 取得網路資料
     private Runnable readData = new Runnable() {
         public void run() {
             // server端的IP
             InetAddress serverIp;
-
             try {
-                // 以內定(本機電腦端)IP為Server端
-                serverIp = InetAddress.getByName("140.117.213.10");
+                // 輸入server端的IP
+                serverIp = InetAddress.getByName("140.116.20.185");
                 int serverPort = 5050;
                 clientSocket = new Socket(serverIp, serverPort);
-                // 取得網路輸入串流
                 BufferedReader br = new BufferedReader(new InputStreamReader(
                         clientSocket.getInputStream()));
 
-                // 當連線後
                 while (clientSocket.isConnected()) {
-                    // 取得網路訊息
                     tmp1 = br.readLine();
-                    // 如果不是空訊息則
                     tmp2 = br.readLine();
-                    //  if(tmp1!=null)
-                    // 顯示新的訊息
-                    //  mHandler.post(updateText);
-                    /*if(tmp2!=null)
-                        // 顯示新的訊息
-                        mHandler.post(updateText);*/
-
                 }
-
-
-
             } catch (IOException e) {
-
             }
         }
     };
